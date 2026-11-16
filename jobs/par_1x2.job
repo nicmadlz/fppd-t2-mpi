@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH -J par_1x2
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=2
+#SBATCH --exclusive
+#SBATCH --no-requeue
+#SBATCH --export=ALL
+#SBATCH -t 01:00:00
+#SBATCH -o %x.%j.out
+
+echo "Início: $(date)"
+echo "Job:    $SLURM_JOB_ID"
+echo "Nós:    $SLURM_JOB_NODELIST"
+
+for r in $(seq 1 10); do
+  echo "== Repetição $r"
+  mpirun -np 2 $SLURM_SUBMIT_DIR/paralelo/paralelo -n 5000
+done
+
+echo "Fim:    $(date)"

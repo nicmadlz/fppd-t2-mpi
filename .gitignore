@@ -1,0 +1,7 @@
+.claude/
+.DS_Store
+t2-processamento-paralelo.pdf
+__pycache__/
+paralelo/paralelo
+sequencial/sequencial
+*.out

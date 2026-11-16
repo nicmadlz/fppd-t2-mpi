@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -J sequencial
+#SBATCH -N 1
+#SBATCH -n 1
+#SBATCH --exclusive
+#SBATCH -t 01:00:00
+#SBATCH -o %x.%j.out
+
+# Medição da versão sequencial: 10 repetições com N = 5000, num nó exclusivo.
+# Compilar antes, no frontend (go build -o sequencial .), e submeter com:
+#   sbatch sequencial.job
+
+echo "Início: $(date)"
+echo "Job:    $SLURM_JOB_ID"
+echo "Nós:    $SLURM_JOB_NODELIST"
+
+for r in $(seq 1 10); do
+  echo "== Repetição $r"
+  ./sequencial
+done
+
+echo "Fim:    $(date)"

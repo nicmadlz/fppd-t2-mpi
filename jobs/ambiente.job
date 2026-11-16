@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -J ambiente
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=2
+#SBATCH --exclusive
+#SBATCH --no-requeue
+#SBATCH --export=ALL
+#SBATCH -t 00:10:00
+#SBATCH -o %x.%j.out
+
+echo "Início: $(date)"
+echo "Job:    $SLURM_JOB_ID"
+echo "Nós:    $SLURM_JOB_NODELIST"
+
+echo "== 01-hello"
+mpirun -np 4 ./bin/01-hello
+
+echo "== lscpu"
+srun -N 1 -n 1 lscpu
+
+echo "Fim:    $(date)"
